@@ -108,7 +108,6 @@ class BPUPSubscriptions:
         """Notify subscribers of an update."""
         self.last_message_time = time.time()
 
-        print(json_msg)
         if json_msg.get("s") != 200:
             return
 
