@@ -1,15 +1,14 @@
 """Bond Local API wrapper."""
 
+import asyncio
+import json
+import time
 from asyncio import transports
-from typing import List, Optional, Callable, Any
+from typing import Any, Callable, List, Optional
 
 from aiohttp import ClientSession, ClientTimeout
 
 from .action import Action
-
-import time
-import json
-import asyncio
 
 BPUP_INIT_PUSH_MESSAGE = b"\n"
 BPUP_PORT = 30007
@@ -113,7 +112,8 @@ class BPUPSubscriptions:
         if json_msg.get("s") != 200:
             return
 
-        _, device_id = json_msg["t"].split("/")
+        topic = json_msg["t"].split("/")
+        device_id = topic[1]
 
         for callback in self._callbacks.get(device_id, []):
             callback(json_msg["b"])
