@@ -48,7 +48,7 @@ async def test_bridge(bond: Bond):
             "http://test-host/v2/bridge",
             payload={"name": "name", "location": "location"}
         )
-        actual = await bond.version()
+        actual = await bond.bridge()
         assert actual == {"name": "name", "location": "location"}
 
 
