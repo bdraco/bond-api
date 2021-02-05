@@ -106,7 +106,7 @@ class BPUPSubscriptions:
 
     def unsubscribe(self, device_id, callback):
         """Unsubscribe from BPUP updates."""
-        self._callbacks.setdefault(device_id, []).remove(callback)
+        self._callbacks[device_id].remove(callback)
 
     def notify(self, json_msg):
         """Notify subscribers of an update."""
